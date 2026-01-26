@@ -99,8 +99,8 @@ const Features = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-6 py-3 mb-6">
             <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            <span className="text-emerald-400 font-medium">
-              WHY CHOOSE TRADEPRO
+            <span className="text-emerald-400 font-medium uppercase">
+              Opportunities
             </span>
           </div>
 

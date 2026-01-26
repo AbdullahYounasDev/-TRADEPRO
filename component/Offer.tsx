@@ -86,7 +86,7 @@ const TradingOffers = () => {
             </span>
             <br />
             <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              Premium Trading Opportunities
+              Premium Trading Offers
             </span>
           </h2>
 
