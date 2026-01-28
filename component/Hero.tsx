@@ -1,8 +1,9 @@
-// components/Hero.tsx
 'use client';
 
 import { ArrowRight, TrendingUp, Shield, Zap, BarChart3, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Variants } from "framer-motion";
 
 const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -31,6 +32,19 @@ const Hero = () => {
     { symbol: 'SOL/USD', price: '185.65', change: '+5.67%', isUp: true },
   ];
 
+  // Framer Motion variants
+  const fadeInUp : Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const fadeIn : Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const buttonHover = { scale: 1.05 };
+
   return (
     <section className="relative min-h-screen pt-32 md:pt-36 pb-10 overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900">
       {/* Background */}
@@ -49,17 +63,29 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* LEFT */}
-          <div className="relative z-10">
+          <motion.div
+            className="relative z-10"
+            initial="hidden"
+            animate="visible"
+            variants={fadeInUp}
+          >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 mb-8 animate-fade-in">
+            <motion.div
+              className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 mb-8"
+              variants={fadeIn}
+            >
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
               <span className="text-xs sm:text-sm text-gray-300 font-medium">
                 LIVE: <span className="text-emerald-400">Markets up 3.2% today</span>
               </span>
-            </div>
+            </motion.div>
 
-            {/* Heading (ONLY mobile adjusted) */}
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+            {/* Heading */}
+            <motion.h1
+              className="text-3xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight"
+              variants={fadeInUp}
+              transition={{ delay: 0.2 }}
+            >
               <span className="bg-gradient-to-r from-gray-100 via-blue-100 to-gray-300 bg-clip-text text-transparent">
                 Trade Like
               </span>
@@ -70,38 +96,55 @@ const Hero = () => {
                 </span>
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full"></span>
               </span>
-            </h1>
+            </motion.h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
+            <motion.p
+              className="text-base sm:text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed"
+              variants={fadeInUp}
+              transition={{ delay: 0.4 }}
+            >
               Advanced trading platform with AI-powered insights, real-time analytics,
               and institutional-grade tools for modern traders.
-            </p>
+            </motion.p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 mb-12">
-              <button className="group bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base md:text-lg hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300">
+            <motion.div
+              className="flex flex-wrap gap-4 mb-12"
+              variants={fadeInUp}
+              transition={{ delay: 0.6 }}
+            >
+              <motion.button
+                className="group bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base md:text-lg hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300"
+                whileHover={buttonHover}
+              >
                 <div className="flex items-center gap-3">
                   Start Trading Free
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
-              </button>
+              </motion.button>
 
-              <button className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-gray-800/80 transition-all duration-300">
+              <motion.button
+                className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base md:text-lg hover:bg-gray-800/80 transition-all duration-300"
+                whileHover={buttonHover}
+              >
                 <div className="flex items-center gap-3">
                   <Users className="w-5 h-5" />
                   Join 2M+ Traders
                 </div>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 sm:gap-6">
               {stats.map((stat, index) => (
-                <div
+                <motion.div
                   key={stat.label}
                   onMouseEnter={() => setActiveIndex(index)}
                   className="relative group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 + index * 0.1 }}
                 >
                   <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/30 rounded-2xl p-4 sm:p-5">
                     <div className="text-xl sm:text-2xl font-bold text-white">{stat.value}</div>
@@ -115,13 +158,18 @@ const Hero = () => {
                   {activeIndex === index && (
                     <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-emerald-500/20 rounded-2xl blur-lg -z-10"></div>
                   )}
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* RIGHT CARD (UNCHANGED layout) */}
-          <div className="relative max-w-[600px] lg:ml-[113px]">
+          {/* RIGHT CARD */}
+          <motion.div
+            className="relative max-w-[600px] lg:ml-[113px]"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
+          >
             <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl border border-gray-700/30 rounded-3xl p-6 sm:p-8 shadow-2xl">
               <div className="flex items-center justify-between mb-8">
                 <div>
@@ -141,12 +189,14 @@ const Hero = () => {
               {/* Chart */}
               <div className="relative h-48 mb-8">
                 <svg className="w-full h-full" viewBox="0 0 400 200">
-                  <path
+                  <motion.path
                     d="M0,150 Q100,100 200,120 Q300,140 400,100"
                     fill="none"
                     stroke="url(#chartGradient)"
                     strokeWidth="3"
-                    className="animate-draw"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1.5, ease: 'easeInOut' }}
                   />
                   <defs>
                     <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -157,31 +207,40 @@ const Hero = () => {
                 </svg>
               </div>
 
-              {/* Pairs */}
+              {/* Trading Pairs */}
               <div className="space-y-4">
-                {tradingPairs.map(pair => (
-                  <div
+                {tradingPairs.map((pair, i) => (
+                  <motion.div
                     key={pair.symbol}
                     className="flex items-center justify-between p-4 bg-gray-800/30 rounded-xl hover:bg-gray-800/50 transition"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.9 + i * 0.1 }}
                   >
                     <div className="font-bold text-white">{pair.symbol}</div>
                     <div className={`text-sm font-semibold ${pair.isUp ? 'text-emerald-400' : 'text-red-400'}`}>
                       {pair.change}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
-                <button className="border border-blue-500/30 text-white py-3 rounded-xl hover:border-blue-500/50 transition">
+                <motion.button
+                  className="border border-blue-500/30 text-white py-3 rounded-xl hover:border-blue-500/50 transition"
+                  whileHover={buttonHover}
+                >
                   Buy Crypto
-                </button>
-                <button className="border border-emerald-500/30 text-white py-3 rounded-xl hover:border-emerald-500/50 transition">
+                </motion.button>
+                <motion.button
+                  className="border border-emerald-500/30 text-white py-3 rounded-xl hover:border-emerald-500/50 transition"
+                  whileHover={buttonHover}
+                >
                   Trade Now
-                </button>
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

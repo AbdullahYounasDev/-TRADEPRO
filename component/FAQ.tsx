@@ -1,4 +1,3 @@
-// components/FAQ.tsx
 "use client";
 
 import { useState } from "react";
@@ -12,6 +11,8 @@ import {
   User,
   CreditCard,
 } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState("general");
@@ -19,35 +20,15 @@ const FAQ = () => {
 
   const toggleItem = (index: number) => {
     setOpenItems((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
   const categories = [
-    {
-      id: "general",
-      name: "General",
-      icon: <HelpCircle className="w-5 h-5" />,
-      color: "from-blue-600 to-emerald-600",
-    },
-    {
-      id: "security",
-      name: "Security",
-      icon: <Lock className="w-5 h-5" />,
-      color: "from-blue-600 to-emerald-600",
-    },
-    {
-      id: "trading",
-      name: "Trading",
-      icon: <BarChart3 className="w-5 h-5" />,
-      color: "from-blue-600 to-emerald-600",
-    },
-    {
-      id: "account",
-      name: "Account",
-      icon: <User className="w-5 h-5" />,
-      color: "from-blue-600 to-emerald-600",
-    },
+    { id: "general", name: "General", icon: <HelpCircle className="w-5 h-5" />, color: "from-blue-600 to-emerald-600" },
+    { id: "security", name: "Security", icon: <Lock className="w-5 h-5" />, color: "from-blue-600 to-emerald-600" },
+    { id: "trading", name: "Trading", icon: <BarChart3 className="w-5 h-5" />, color: "from-blue-600 to-emerald-600" },
+    { id: "account", name: "Account", icon: <User className="w-5 h-5" />, color: "from-blue-600 to-emerald-600" },
   ];
 
   const faqs = {
@@ -157,154 +138,143 @@ const FAQ = () => {
     ],
   };
 
+  // Header Animation
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  // Tabs
+  const tabVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
+  };
+
+  // CTA
+  const ctaVariants: Variants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7 } },
+  };
+
   return (
-    <section
-      className="relative py-24 overflow-hidden bg-gradient-to-b from-black via-gray-950 to-black"
-      id="faq"
-    >
+    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-black via-gray-950 to-black" id="faq">
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+        {/* Header */}
+        <motion.div
+          ref={useInView({ triggerOnce: true })[0]}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={headerVariants}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 bg-gray-800/30 backdrop-blur-sm border border-gray-700/30 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium uppercase">
-              Common Questions
-            </span>
+            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium uppercase">Common Questions</span>
           </div>
 
           <h2 className="text-3xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
-              Frequently Asked
-            </span>
+            <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">Frequently Asked</span>
             <br />
-            <span className="bg-gradient-to-r from-blue-500 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              Questions
-            </span>
+            <span className="bg-gradient-to-r from-blue-500 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">Questions</span>
           </h2>
 
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Find quick answers to common questions about our platform, features,
-            and services.
+            Find quick answers to common questions about our platform, features, and services.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-6xl mx-auto">
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => {
-                  setActiveCategory(category.id);
-                  setOpenItems([0]); // Open first item when switching categories
-                }}
-                className={`group flex items-center gap-3 px-6 py-4 rounded-xl border transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? `bg-gradient-to-r ${category.color} border-transparent text-white`
-                    : "bg-gray-800/30 border-gray-700/30 text-gray-400 hover:text-white hover:border-gray-600/50"
-                }`}
-              >
-                <div
-                  className={`p-2 rounded-lg ${
-                    activeCategory === category.id
-                      ? "bg-white/20"
-                      : "bg-gray-800/50 group-hover:bg-gray-800/80"
-                  }`}
-                >
-                  {category.icon}
-                </div>
-                <span className="font-medium">{category.name}</span>
-              </button>
-            ))}
-          </div>
+        {/* Tabs */}
+        <motion.div className="flex flex-wrap justify-center gap-3 mb-12">
+          {categories.map((category, i) => (
+            <motion.button
+              key={category.id}
+              custom={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              onClick={() => { setActiveCategory(category.id); setOpenItems([0]); }}
+              className={`group flex items-center gap-3 px-6 py-4 rounded-xl border transition-all duration-300 ${
+                activeCategory === category.id
+                  ? `bg-gradient-to-r ${category.color} border-transparent text-white`
+                  : "bg-gray-800/30 border-gray-700/30 text-gray-400 hover:text-white hover:border-gray-600/50"
+              }`}
+            >
+              <div className={`p-2 rounded-lg ${activeCategory === category.id ? "bg-white/20" : "bg-gray-800/50 group-hover:bg-gray-800/80"}`}>{category.icon}</div>
+              <span className="font-medium">{category.name}</span>
+            </motion.button>
+          ))}
+        </motion.div>
 
-          {/* FAQ Accordion */}
-          <div className="space-y-4">
-            {faqs[activeCategory as keyof typeof faqs].map((faq, index) => (
-              <div
+        {/* FAQ Items with unique animations */}
+        <div className="space-y-4">
+          {faqs[activeCategory as keyof typeof faqs].map((faq, index) => {
+            const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+
+            // Unique directions
+            const variants: Variants = {
+              hidden: { opacity: 0, x: index % 3 === 0 ? -50 : index % 3 === 1 ? 50 : 0, y: index % 3 === 2 ? 50 : 0 },
+              visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+            };
+
+            return (
+              <motion.div
                 key={index}
-                className={`bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-xl border border-gray-700/30 rounded-2xl overflow-hidden transition-all duration-300 ${
-                  openItems.includes(index) ? "shadow-lg" : ""
-                }`}
+                ref={ref}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={variants}
+                className={`bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-xl border border-gray-700/30 rounded-2xl overflow-hidden transition-all duration-300 ${openItems.includes(index) ? "shadow-lg" : ""}`}
               >
-                <button
-                  onClick={() => toggleItem(index)}
-                  className="w-full flex items-center justify-between p-8 text-left"
-                >
+                <button onClick={() => toggleItem(index)} className="w-full flex items-center justify-between p-8 text-left">
                   <div className="flex items-start gap-4">
-                    <div
-                      className={`p-3 rounded-xl ${
-                        openItems.includes(index)
-                          ? "bg-blue-500/20 text-blue-400"
-                          : "bg-gray-800/50 text-gray-400"
-                      }`}
-                    >
+                    <div className={`p-3 rounded-xl ${openItems.includes(index) ? "bg-blue-500/20 text-blue-400" : "bg-gray-800/50 text-gray-400"}`}>
                       {faq.icon}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        {faq.question}
-                      </h3>
-                      <div
-                        className={`text-gray-400 transition-all duration-300 ${
-                          openItems.includes(index)
-                            ? "opacity-100 max-h-0"
-                            : "opacity-0 max-h-0"
-                        }`}
-                      >
-                        Quick answer available
-                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2">{faq.question}</h3>
                     </div>
                   </div>
-                  <ChevronDown
-                    className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${
-                      openItems.includes(index) ? "rotate-180" : ""
-                    }`}
-                  />
+                  <ChevronDown className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${openItems.includes(index) ? "rotate-180" : ""}`} />
                 </button>
 
-                {/* Answer */}
-                <div
-                  className={`px-8 transition-all duration-300 overflow-hidden ${
-                    openItems.includes(index)
-                      ? "max-h-96 pb-8 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
+                <div className={`px-8 transition-all duration-300 overflow-hidden ${openItems.includes(index) ? "max-h-96 pb-8 opacity-100" : "max-h-0 opacity-0"}`}>
                   <div className="pl-16">
                     <div className="border-l-2 border-blue-500/30 pl-6">
-                      <p className="text-gray-300 leading-relaxed">
-                        {faq.answer}
-                      </p>
+                      <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              </motion.div>
+            );
+          })}
+        </div>
 
-          {/* Contact CTA */}
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-4 bg-gradient-to-r from-gray-800/30 to-gray-900/30 backdrop-blur-xl border border-gray-700/30 rounded-2xl p-8">
-              <div className="text-left">
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  Still have questions?
-                </h3>
-                <p className="text-gray-400">
-                  Our support team is available 24/7 to help you.
-                </p>
-              </div>
-              <div className="flex gap-4">
-                <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
-                  Contact Support
-                </button>
-                <button className="px-8 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
-                  View Docs
-                </button>
-              </div>
+        {/* CTA */}
+        <motion.div
+          ref={useInView({ triggerOnce: true })[0]}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={ctaVariants}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-gray-800/30 to-gray-900/30 backdrop-blur-xl border border-gray-700/30 rounded-2xl p-8 flex-wrap justify-center">
+            <div className="text-left">
+              <h3 className="text-2xl font-bold text-white mb-2">Still have questions?</h3>
+              <p className="text-gray-400">Our support team is available 24/7 to help you.</p>
+            </div>
+            <div className="flex gap-4 flex-wrap mt-4 sm:mt-0">
+              <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+                Contact Support
+              </button>
+              <button className="px-8 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
+                View Docs
+              </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

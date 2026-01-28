@@ -1,10 +1,16 @@
 "use client";
 
 import { Shield, Brain, TrendingUp, Users, Zap, Rocket } from "lucide-react";
-import { useEffect, useState, useCallback } from "react";
+import { motion, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const OurStory = () => {
-  const storyPoints = [
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const storyPoints: any[] = [
     {
       icon: <Brain className="w-6 h-6" />,
       title: "Built by Traders",
@@ -43,25 +49,46 @@ const OurStory = () => {
     },
   ];
 
-  // Duplicate items for seamless infinite scroll
-  const duplicatedItems = [...storyPoints, ...storyPoints];
+  // Variants for header and text
+  const textVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  };
+
+  const ctaVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut", delay: 0.5 } },
+  };
 
   return (
     <section
       className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black overflow-hidden"
       id="story"
+      ref={ref}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6"
+            variants={textVariants}
+          >
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full animate-pulse" />
             <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium">
               OUR STORY
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-3xl md:text-6xl font-bold mb-6">
+          {/* Title */}
+          <motion.h2
+            className="text-3xl md:text-6xl font-bold mb-6"
+            variants={textVariants}
+          >
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Built for Traders.
             </span>
@@ -69,15 +96,19 @@ const OurStory = () => {
             <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
               Designed for Growth.
             </span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          {/* Paragraph */}
+          <motion.p
+            className="text-xl text-gray-400 max-w-3xl mx-auto"
+            variants={textVariants}
+          >
             TradePro is more than a platform — it's a trading ecosystem built on
             trust, performance, and long-term success.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Carousel Container */}
+        {/* Carousel Container (keep as-is) */}
         <div className="relative overflow-hidden">
           {/* Gradient Fades */}
           <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-10 md:w-14 bg-gradient-to-r from-black via-black to-transparent z-10" />
@@ -86,10 +117,10 @@ const OurStory = () => {
           {/* Carousel */}
           <div className="flex gap-6">
             <div className={`flex gap-6 animate-scroll`}>
-              {duplicatedItems.map((item, idx) => (
+              {[...storyPoints, ...storyPoints].map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 w-80 bg-gray-800/40 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-6 hover:bg-gray-800/60 transition-all duration-300 break-words"
+                  className="flex-shrink-0 w-80 bg-gray-800/40 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-6 break-words"
                 >
                   <div className="w-12 h-12 mb-4 rounded-xl bg-gray-900 border border-gray-700/50 flex items-center justify-center text-emerald-400">
                     {item.icon}
@@ -109,11 +140,16 @@ const OurStory = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
+        <motion.div
+          className="mt-16 text-center"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={ctaVariants}
+        >
           <button className="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-10 py-4 rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
             Join the TradePro Journey
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Carousel animation CSS */}
@@ -121,10 +157,6 @@ const OurStory = () => {
         .animate-scroll {
           display: flex;
           animation: scroll 20s linear infinite;
-        }
-
-        .animate-pause {
-          animation-play-state: paused;
         }
 
         @keyframes scroll {
@@ -136,7 +168,6 @@ const OurStory = () => {
           }
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
           .animate-scroll {
             animation-duration: 30s;

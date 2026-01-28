@@ -1,150 +1,103 @@
 "use client";
 
-import {
-  TrendingUp,
-  Cpu,
-  Shield,
-  Globe,
-  Zap,
-  Star,
-  Crown,
-  Briefcase,
-} from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const TradingOffers = () => {
-  const offers = [
-    {
-      tier: "Bronze",
-      icon: <Star className="w-6 h-6 text-emerald-400" />,
-      features: [
-        "Access to Forex and Crypto",
-        "Basic charting tools",
-        "Daily trading signals",
-      ],
-    },
-    {
-      tier: "Silver",
-      icon: <Star className="w-6 h-6 text-gray-400" />,
-      features: [
-        "Advanced charting & indicators",
-        "Priority support",
-        "Weekly trading insights",
-      ],
-    },
-    {
-      tier: "Gold",
-      icon: <Crown className="w-6 h-6 text-emerald-400" />,
-      features: [
-        "All Silver features",
-        "Algorithmic trading bots",
-        "Risk management tools",
-      ],
-    },
-    {
-      tier: "Platinum",
-      icon: <Globe className="w-6 h-6 text-emerald-400" />,
-      features: [
-        "All Gold features",
-        "Global market access (Indices & ETFs)",
-        "Premium analytics dashboard",
-      ],
-    },
-    {
-      tier: "VIP",
-      icon: <Shield className="w-6 h-6 text-emerald-400" />,
-      features: [
-        "All Platinum features",
-        "Dedicated account manager",
-        "Exclusive trading webinars",
-      ],
-    },
-    {
-      tier: "Top",
-      icon: <TrendingUp className="w-6 h-6 text-emerald-400" />,
-      features: [
-        "All VIP features",
-        "Tailored portfolio strategies",
-        "Priority market alerts",
-      ],
-    },
-    {
-      tier: "Business",
-      icon: <Briefcase className="w-6 h-6 text-emerald-400" />,
-      features: [
-        "All Top features",
-        "Corporate trading accounts",
-        "White-label solutions",
-      ],
-    },
-  ];
+  // Header text animation
+  const textVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  };
+
+  // Image animation (fade + move up)
+  const imageVariants: Variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+  };
+
+  const [imageRef, imageInView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section
-      className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black"
-      id="offers"
-    >
+    <section className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black" id="offers">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={textVariants}
+          >
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full animate-pulse" />
             <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium">
               TRADING OFFERS
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-3xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
-              Explore Our
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              Premium Trading Offers
-            </span>
-          </h2>
-
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Hover over each offer to discover the features included in our
-            Forex, Crypto, Indices, and ETFs trading packages.
-          </p>
-        </div>
-
-        {/* Offers Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {offers.map((offer) => (
-            <div
-              key={offer.tier}
-              className="group relative bg-gray-800/40 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-6 hover:bg-gray-800/60 transition-all duration-300 cursor-pointer"
+          {/* Title */}
+          <motion.h2
+            className="text-3xl md:text-6xl font-bold mb-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.span
+              className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent block"
+              variants={textVariants}
             >
-              <div className="w-12 h-12 mb-4 flex items-center justify-center">
-                {offer.icon}
-              </div>
+              Explore Our
+            </motion.span>
+            <motion.span
+              className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent block"
+              variants={textVariants}
+            >
+              Premium Trading Offers
+            </motion.span>
+          </motion.h2>
 
-              <h3 className="text-lg font-semibold text-white mb-2">
-                {offer.tier}
-              </h3>
-
-              <ul className="text-gray-400 text-sm space-y-2">
-                {offer.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full flex-shrink-0"></span>
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Hover Glow */}
-              <div className="absolute -inset-1 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-emerald-400/20"></div>
-            </div>
-          ))}
+          {/* Paragraph */}
+          <motion.p
+            className="text-xl text-gray-400 max-w-3xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={textVariants}
+          >
+            Discover the features included in our Forex, Crypto, Indices, and ETFs trading packages.
+          </motion.p>
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <button className="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-10 py-4 rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
+        {/* Full-width Image */}
+        <motion.div
+          ref={imageRef}
+          initial="hidden"
+          animate={imageInView ? "visible" : "hidden"}
+          variants={imageVariants}
+          className="overflow-hidden rounded-3xl shadow-lg"
+        >
+          <img
+            src="/transparent-table.png"
+            alt="Trading Offers"
+            className="w-full object-contain"
+          />
+        </motion.div>
+
+        {/* CTA Button */}
+        <motion.div
+          className="mt-16 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={textVariants}
+        >
+          <button className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-10 py-4 rounded-xl font-semibold">
             Start Your Premium Trading Journey
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
