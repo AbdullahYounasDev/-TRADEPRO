@@ -46,18 +46,22 @@ const OurStory = () => {
   // Duplicate items for seamless infinite scroll
   const duplicatedItems = [...storyPoints, ...storyPoints];
 
-
   return (
-    <section className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black overflow-hidden" id="story">
+    <section
+      className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black overflow-hidden"
+      id="story"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-6 py-3 mb-6">
-            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="text-emerald-400 font-medium">OUR STORY</span>
+          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium">
+              OUR STORY
+            </span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Built for Traders.
             </span>
@@ -76,16 +80,12 @@ const OurStory = () => {
         {/* Carousel Container */}
         <div className="relative overflow-hidden">
           {/* Gradient Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black via-black to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black via-black to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-10 md:w-14 bg-gradient-to-r from-black via-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 sm:w-10 md:w-14 bg-gradient-to-l from-black via-black to-transparent z-10" />
 
           {/* Carousel */}
-          <div 
-            className="flex gap-6"
-          >
-            <div 
-              className={`flex gap-6 animate-scroll`}
-            >
+          <div className="flex gap-6">
+            <div className={`flex gap-6 animate-scroll`}>
               {duplicatedItems.map((item, idx) => (
                 <div
                   key={idx}
@@ -108,7 +108,6 @@ const OurStory = () => {
           </div>
         </div>
 
-
         {/* CTA */}
         <div className="mt-16 text-center">
           <button className="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-10 py-4 rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
@@ -123,11 +122,11 @@ const OurStory = () => {
           display: flex;
           animation: scroll 20s linear infinite;
         }
-        
+
         .animate-pause {
           animation-play-state: paused;
         }
-        
+
         @keyframes scroll {
           0% {
             transform: translateX(0);
@@ -136,14 +135,14 @@ const OurStory = () => {
             transform: translateX(calc(-100% / 2));
           }
         }
-        
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
           .animate-scroll {
             animation-duration: 30s;
           }
         }
-        
+
         @media (max-width: 640px) {
           .animate-scroll {
             animation-duration: 40s;

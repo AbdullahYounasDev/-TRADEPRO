@@ -1,86 +1,99 @@
-'use client';
+"use client";
 
-import { TrendingUp, Cpu, Shield, Globe, Zap, Star, Crown, Briefcase } from 'lucide-react';
+import {
+  TrendingUp,
+  Cpu,
+  Shield,
+  Globe,
+  Zap,
+  Star,
+  Crown,
+  Briefcase,
+} from "lucide-react";
 
 const TradingOffers = () => {
   const offers = [
     {
-      tier: 'Bronze',
+      tier: "Bronze",
       icon: <Star className="w-6 h-6 text-emerald-400" />,
       features: [
-        'Access to Forex and Crypto',
-        'Basic charting tools',
-        'Daily trading signals',
+        "Access to Forex and Crypto",
+        "Basic charting tools",
+        "Daily trading signals",
       ],
     },
     {
-      tier: 'Silver',
+      tier: "Silver",
       icon: <Star className="w-6 h-6 text-gray-400" />,
       features: [
-        'Advanced charting & indicators',
-        'Priority support',
-        'Weekly trading insights',
+        "Advanced charting & indicators",
+        "Priority support",
+        "Weekly trading insights",
       ],
     },
     {
-      tier: 'Gold',
+      tier: "Gold",
       icon: <Crown className="w-6 h-6 text-emerald-400" />,
       features: [
-        'All Silver features',
-        'Algorithmic trading bots',
-        'Risk management tools',
+        "All Silver features",
+        "Algorithmic trading bots",
+        "Risk management tools",
       ],
     },
     {
-      tier: 'Platinum',
+      tier: "Platinum",
       icon: <Globe className="w-6 h-6 text-emerald-400" />,
       features: [
-        'All Gold features',
-        'Global market access (Indices & ETFs)',
-        'Premium analytics dashboard',
+        "All Gold features",
+        "Global market access (Indices & ETFs)",
+        "Premium analytics dashboard",
       ],
     },
     {
-      tier: 'VIP',
+      tier: "VIP",
       icon: <Shield className="w-6 h-6 text-emerald-400" />,
       features: [
-        'All Platinum features',
-        'Dedicated account manager',
-        'Exclusive trading webinars',
+        "All Platinum features",
+        "Dedicated account manager",
+        "Exclusive trading webinars",
       ],
     },
     {
-      tier: 'Top',
+      tier: "Top",
       icon: <TrendingUp className="w-6 h-6 text-emerald-400" />,
       features: [
-        'All VIP features',
-        'Tailored portfolio strategies',
-        'Priority market alerts',
+        "All VIP features",
+        "Tailored portfolio strategies",
+        "Priority market alerts",
       ],
     },
     {
-      tier: 'Business',
+      tier: "Business",
       icon: <Briefcase className="w-6 h-6 text-emerald-400" />,
       features: [
-        'All Top features',
-        'Corporate trading accounts',
-        'White-label solutions',
+        "All Top features",
+        "Corporate trading accounts",
+        "White-label solutions",
       ],
     },
   ];
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black" id='offers'>
+    <section
+      className="relative py-24 bg-gradient-to-b from-black via-gray-950 to-black"
+      id="offers"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-6 py-3 mb-6">
-            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="text-emerald-400 font-medium">TRADING OFFERS</span>
+          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium">
+              TRADING OFFERS
+            </span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Explore Our
             </span>
@@ -91,7 +104,8 @@ const TradingOffers = () => {
           </h2>
 
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Hover over each offer to discover the features included in our Forex, Crypto, Indices, and ETFs trading packages.
+            Hover over each offer to discover the features included in our
+            Forex, Crypto, Indices, and ETFs trading packages.
           </p>
         </div>
 
@@ -106,8 +120,10 @@ const TradingOffers = () => {
                 {offer.icon}
               </div>
 
-              <h3 className="text-lg font-semibold text-white mb-2">{offer.tier}</h3>
-              
+              <h3 className="text-lg font-semibold text-white mb-2">
+                {offer.tier}
+              </h3>
+
               <ul className="text-gray-400 text-sm space-y-2">
                 {offer.features.map((feat, idx) => (
                   <li key={idx} className="flex items-center gap-2">
@@ -129,7 +145,6 @@ const TradingOffers = () => {
             Start Your Premium Trading Journey
           </button>
         </div>
-
       </div>
     </section>
   );

@@ -1,44 +1,42 @@
-'use client';
+"use client";
 
 import {
   Shield,
   Zap,
   CreditCard,
-  Wallet,
-  Bitcoin,
   ArrowRight,
-} from 'lucide-react';
+} from "lucide-react";
 
 const Deposit = () => {
   const features = [
     {
-      title: 'Simple & Transparent Fees',
-      description: '0% deposit & withdrawal fees. No hidden charges.',
+      title: "Simple & Transparent Fees",
+      description: "0% deposit & withdrawal fees. No hidden charges.",
       icon: <Shield className="w-6 h-6" />,
-      highlight: '0% Fees',
+      highlight: "0% Fees",
     },
     {
-      title: 'Fast Withdrawals',
-      description: 'Withdrawals processed within 24 hours maximum.',
+      title: "Fast Withdrawals",
+      description: "Withdrawals processed within 24 hours maximum.",
       icon: <Zap className="w-6 h-6" />,
-      highlight: '24h Max',
+      highlight: "24h Max",
     },
     {
-      title: 'Global Payment Methods',
-      description: 'Card, bank transfer & crypto. 10+ secure methods.',
+      title: "Global Payment Methods",
+      description: "Card, bank transfer & crypto. 10+ secure methods.",
       icon: <CreditCard className="w-6 h-6" />,
-      highlight: 'Worldwide',
+      highlight: "Worldwide",
     },
   ];
 
   const paymentMethods = [
-    { name: 'Visa' },
-    { name: 'Mastercard' },
-    { name: 'PayPal' },
-    { name: 'Bank Transfer' },
-    { name: 'Skrill' },
-    { name: 'Neteller' },
-    { name: 'Bitcoin' },
+    { name: "Visa" },
+    { name: "Mastercard" },
+    { name: "PayPal" },
+    { name: "Bank Transfer" },
+    { name: "Skrill" },
+    { name: "Neteller" },
+    { name: "Bitcoin" },
   ];
 
   return (
@@ -55,14 +53,14 @@ const Deposit = () => {
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-8">
-          <div className="inline-flex items-center gap-2 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
-            <Wallet className="w-4 h-4 text-emerald-400" />
-            <span className="text-emerald-400 font-medium">
-              SECURE FUNDS MANAGEMENT
+          <div className="inline-flex items-center gap-2 bg-gray-800/50 border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium uppercase">
+              Secure Funds Management
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Take Control of
             </span>
@@ -123,12 +121,12 @@ const Deposit = () => {
           </div>
 
           {/* CTA */}
-           <div className="mt-12 text-center">
-          <button className="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-10 py-4 rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
-            Manage Your Funds Now
-            <ArrowRight className="w-4 h-4 ml-2 inline-block group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-        </div>
+          <div className="mt-12 text-center">
+            <button className="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white px-10 py-4 rounded-xl font-semibold hover:bg-gray-800/80 transition-all duration-300">
+              Manage Your Funds Now
+              <ArrowRight className="w-4 h-4 ml-2 inline-block group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

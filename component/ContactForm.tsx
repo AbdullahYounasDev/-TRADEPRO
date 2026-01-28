@@ -28,7 +28,7 @@ const ContactForm = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="text-3xl md:text-6xl font-bold mb-4">
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Get in Touch
             </span>

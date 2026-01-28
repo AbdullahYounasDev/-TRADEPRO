@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Shield,
-  Zap,
-  Globe,
-  BarChart3,
-  Headphones,
-  Lock,
-} from "lucide-react";
+import { Shield, Zap, Globe, BarChart3, Headphones } from "lucide-react";
 
 const CFDExplanation = () => {
   const features = [
@@ -38,8 +31,7 @@ const CFDExplanation = () => {
     {
       number: "03",
       title: "Global Markets",
-      description:
-        "Trade multiple asset classes from one powerful platform.",
+      description: "Trade multiple asset classes from one powerful platform.",
       icon: <Globe className="w-8 h-8 text-emerald-400" />,
       details: [
         "Forex & Crypto CFDs",
@@ -62,8 +54,7 @@ const CFDExplanation = () => {
     {
       number: "05",
       title: "24/7 Expert Support",
-      description:
-        "Get professional assistance whenever you need it.",
+      description: "Get professional assistance whenever you need it.",
       icon: <Headphones className="w-8 h-8 text-emerald-400" />,
       details: [
         "Round-the-clock support",
@@ -81,14 +72,14 @@ const CFDExplanation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 bg-gray-800/40 backdrop-blur-sm border border-gray-700/40 rounded-full px-6 py-3 mb-6">
-            <Lock className="w-5 h-5 text-emerald-400" />
-            <span className="text-emerald-400 font-medium">
-              CFD TRADING ADVANTAGES
+          <div className="inline-flex items-center gap-2 bg-gray-800/40 backdrop-blur-sm border border-gray-700/40 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium uppercase">
+              CFD Trading Advantages
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Why Choose
             </span>
@@ -125,17 +116,13 @@ const CFDExplanation = () => {
                 </div>
               </div>
 
-              <p className="text-gray-400 mb-4">
-                {item.description}
-              </p>
+              <p className="text-gray-400 mb-4">{item.description}</p>
 
               <div className="space-y-2">
                 {item.details.map((detail, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="text-gray-300 text-sm">
-                      {detail}
-                    </span>
+                    <span className="text-gray-300 text-sm">{detail}</span>
                   </div>
                 ))}
               </div>

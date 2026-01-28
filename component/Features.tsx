@@ -97,14 +97,14 @@ const Features = () => {
       <div className="relative container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-6 py-3 mb-6">
-            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-            <span className="text-emerald-400 font-medium uppercase">
+          <div className="inline-flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 mb-6">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="text-xs sm:text-sm md:text-base text-emerald-400 font-medium uppercase">
               Opportunities
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
               Built for
             </span>
