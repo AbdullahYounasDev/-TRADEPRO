@@ -59,7 +59,7 @@ const Hero = () => {
             </div>
 
             {/* Heading (ONLY mobile adjusted) */}
-            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-100 via-blue-100 to-gray-300 bg-clip-text text-transparent">
                 Trade Like
               </span>
